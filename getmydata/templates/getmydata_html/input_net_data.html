@@ -1,0 +1,104 @@
+{% extends "main_html/wrapper.html" %}
+
+    {% block content %}
+        <h1><p>New Scan</p></h1>
+        <p>
+            <a href="/" class="btn btn-dark btn-light">Return to start</a>
+        </p>
+        <p>Firstly, you need to enter IP Address and Subnet Mask of the server, where this web-application is running.</p>
+
+        <div class="container">
+            <form name="netdata" class="needs-validation" method="post" novalidate action="/getmydata/">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="title">Title of Scan <span class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter the title of scan...">
+
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="ip_address">IP Address</label>
+                    <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="Enter IP Address of Django Server..." required>
+                    <div class="invalid-feedback">
+                    Valid IP Address is required.
+                    </div>
+
+                </div>
+
+                <p></p>
+
+                <div class="mb-3">
+                    <label for="subnet_mask">Subnet Mask</label>
+                    <select class="custom-select d-block" id="subnet_mask" name="subnet_mask" required>
+                        <option value="">Choose Mask of Django Server...</option>
+                        <option>255.255.255.255</option>
+                        <option>255.255.255.254</option>
+                        <option>255.255.255.252</option>
+                        <option>255.255.255.248</option>
+                        <option>255.255.255.240</option>
+                        <option>255.255.255.224</option>
+                        <option>255.255.255.192</option>
+                        <option>255.255.255.128</option>
+                        <option>255.255.255.0</option>
+                        <option>255.255.254.0</option>
+                        <option>255.255.252.0</option>
+                        <option>255.255.248.0</option>
+                        <option>255.255.240.0</option>
+                        <option>255.255.224.0</option>
+                        <option>255.255.192.0</option>
+                        <option>255.255.128.0</option>
+                        <option>255.255.0.0</option>
+                    </select>
+
+                    <div class="invalid-feedback">
+                        Valid Subnet Mask is required.
+                    </div>
+
+                </div>
+
+                <hr class="mb-4">
+                <button id="button-sub" class="btn btn-primary btn-block" type="submit">Submit data</button>
+
+            </form>
+        </div>
+
+
+            <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+
+            (function() {
+              'use strict';
+              window.addEventListener('load', function() {
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+
+                  form.addEventListener('submit', function(event) {
+
+                    if (form.checkValidity() === false) {
+
+                      event.preventDefault();
+                      event.stopPropagation();
+
+                    }
+
+                    form.classList.add('was-validated');
+
+                  }, false);
+
+                });
+
+              }, false);
+
+            })();
+
+            </script>
+
+
+
+
+    {% endblock %}

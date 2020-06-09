@@ -1,0 +1,132 @@
+{% extends "main_html/wrapper.html" %}
+
+{% block content %}
+    <h1><p>{{ scan }}</p></h1>
+    <p>
+    <div class="row">
+        <div class="col">
+            <a href="/" class="btn btn-primary btn-dark">Return to Main Page</a>
+            <a href="/result" class="btn btn-secondary">Return to Results</a>
+        </div>
+        <div class="col-auto">
+            <a href="/result/del-{{ scan.id }}" class="btn btn-danger">Delete Scan</a>
+        </div>
+    </div>
+    </p>
+
+
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <h5 class="border-bottom border-gray pb-2 mb-0">Scan Information</h5>
+            <div class="row text-muted pt-3">
+                <div class="col">
+                    <strong class="d-block text-gray-dark">Time of Start</strong>
+                    <p>{{ scan.time }}</p>
+                </div>
+                <div class="col">
+                    <strong class="d-block text-gray-dark">Title</strong>
+                    <p>{{ scan.title }}</p>
+                </div>
+            </div>
+
+        <h5 class="border-bottom border-gray pb-2 mb-2">Server Information</h5>
+        <div class="row text-muted">
+            <div class="col">
+                <strong class="d-block text-gray-dark">Hostname</strong>
+                <p>{{ homehost.hostname }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">OS Type</strong>
+                <p>{{ homehost.os_type }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">OS Name</strong>
+                <p>{{ homehost.os_name}}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">MAC Address</strong>
+                <p>{{ homehost.mac_address }}</p>
+            </div>
+        </div>
+        <div class="row text-muted">
+            <div class="col">
+                <strong class="d-block text-gray-dark">IP Address</strong>
+                <p>{{ homehost.ip_address }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">Network Address</strong>
+                <p>{{ homehost.network_address }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">Subnet Mask</strong>
+                <p>{{ homehost.subnet_mask }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">Broadcast Address</strong>
+                <p>{{ homehost.broadcast_address }}</p>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="row">
+            <div class="col">
+                        {% if icmp_scans %}
+                            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                                <h5 class="pb-2 mb-0">ICMP Results</h5>
+                                <div class="media text-muted pt-3">
+                                    <p class="media-body pb-2 mb-0">
+                                        {{ icmp_scans.count }} IP addresses has been found by ICMP Scanning in {{ scan.icmp_scan_time }} seconds.
+                                    </p>
+                                </div>
+                                <div class="text-muted pt-3">
+                                    {% for ipaddress in icmp_scans %}
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item align-content-center">{{ ipaddress }}</li>
+                                        </ul>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+            </div>
+            <div class="col">
+                        {% if tcp_scans %}
+                            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                                <h5 class="pb-2 mb-0">TCP Results</h5>
+                                <div class="media text-muted pt-3">
+                                    <p class="media-body pb-2 mb-0">
+                                        {{ tcp_scans.count }} IP addresses has been found by TCP Scanning in {{ scan.tcp_scan_time }} seconds.
+                                    </p>
+                                </div>
+                                <div class="text-muted pt-3">
+                                    {% for ipaddress in tcp_scans %}
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">{{ ipaddress }}</li>
+                                        </ul>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        {% endif %}
+            </div>
+        </div>
+
+
+
+        {% if hosts %}
+
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h4 class="pb-2 mb-0">Hosts</h4>
+                <div class="text-muted pt-3">
+                {% for host in hosts %}
+                    <div class="list-group">
+                            <a href="/result/{{ scan.id }}/{{ host.id }}" class="list-group-item list-group-item-action">
+                                <p class="text-gray-dark pb-2 mb-0">{{ host }}</p>
+                            </a>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+
+        {% endif %}
+
+{% endblock %}

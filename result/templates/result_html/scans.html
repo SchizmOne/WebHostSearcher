@@ -1,0 +1,50 @@
+{% extends "main_html/wrapper.html" %}
+
+{% block content %}
+    <h1><p>Scan Results</p></h1>
+    <p>
+    <a href="/" class="btn btn-dark btn-light">Return to Main Page</a>
+    </p>
+        {% if object_list %}
+            <div class="container bg-white rounded my-3 shadow-sm">
+                <table class="table my-xl-1">
+
+                    <div class="text-muted">
+                    <thead>
+                        <tr>
+                            <td scope="col"><strong>Title of Scanning</strong></td>
+                            <td scope="col"><strong>Time of Scanning</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for scan in object_list %}
+                            <tr>
+                              <div class="media text-muted pt-1">
+                                  <td>
+                                      <a href="/result/{{ scan.id }}">
+                                        <p class="text-gray-dark pb-2 mb-0">{{ scan.title }}</p>
+                                      </a>
+                                  </td>
+                                  <td>
+                                      <p class="text-gray-dark pb-2 mb-0">{{ scan.launch_time }}</p>
+                                  </td>
+
+                              </div>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                    </div>
+                </table>
+            </div>
+
+        {% else %}
+
+            <section class="jumbotron text-center">
+            <div class="container">
+              <p class="lead text-muted">Currently there are no scan results.</p>
+            </div>
+            </section>
+
+        {% endif %}
+{% endblock %}

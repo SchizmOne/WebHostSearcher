@@ -1,0 +1,67 @@
+{% extends "main_html/wrapper.html" %}
+
+{% block content %}
+    <h1><p>{{ scan }}</p></h1>
+    <p>
+        <a href="/" class="btn btn-dark btn-light">Return to start</a>
+    </p>
+
+    <p>Server got your input and created starting configuration:</p>
+
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <h5 class="border-bottom border-gray pb-2 mb-0">Scan Information</h5>
+            <div class="row text-muted pt-3">
+                <div class="col">
+                    <strong class="d-block text-gray-dark">Time of Start</strong>
+                    <p>{{ scan.time }}</p>
+                </div>
+                <div class="col">
+                    <strong class="d-block text-gray-dark">Title</strong>
+                    <p>{{ scan.title }}</p>
+                </div>
+            </div>
+
+        <h5 class="border-bottom border-gray pb-2 mb-2">Server Information</h5>
+        <div class="row text-muted">
+            <div class="col">
+                <strong class="d-block text-gray-dark">Hostname</strong>
+                <p>{{ homehost.hostname }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">OS Type</strong>
+                <p>{{ homehost.os_type }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">OS Name</strong>
+                <p>{{ homehost.os_name}}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">MAC Address</strong>
+                <p>{{ homehost.mac_address }}</p>
+            </div>
+        </div>
+        <div class="row text-muted">
+            <div class="col">
+                <strong class="d-block text-gray-dark">IP Address</strong>
+                <p>{{ homehost.ip_address }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">Network Address</strong>
+                <p>{{ homehost.network_address }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">Subnet Mask</strong>
+                <p>{{ homehost.subnet_mask }}</p>
+            </div>
+            <div class="col">
+                <strong class="d-block text-gray-dark">Broadcast Address</strong>
+                <p>{{ homehost.broadcast_address }}</p>
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+    <h4>Second step:</h4>
+    <p></p>
+        <a href="/icmpscan" class="btn btn-dark btn-lg">Start IP Scanning</a>
+{% endblock %}

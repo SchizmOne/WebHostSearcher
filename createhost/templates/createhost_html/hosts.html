@@ -1,0 +1,26 @@
+{% extends "main_html/wrapper.html" %}
+
+{% block content %}
+    <h1><p>Hosts ({{ scan }})</p></h1>
+    <p>
+        <a href="/" class="btn btn-dark btn-light">Return to Main Page</a>
+    </p>
+
+        {% if hosts %}
+
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h4 class="pb-2 mb-0">Hosts</h4>
+                <div class="text-muted pt-3">
+                {% for host in hosts %}
+                    <div class="list-group">
+                            <a href="/createhost/{{ host.id }}" class="list-group-item list-group-item-action">
+                                <p class="text-gray-dark pb-2 mb-0">{{ host }}</p>
+                            </a>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+
+        {% endif %}
+
+{% endblock %}

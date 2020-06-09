@@ -1,0 +1,58 @@
+{% extends "main_html/wrapper.html" %}
+
+{% block content %}
+    <h1><p>IP Scanning</p></h1>
+    <p>
+        <a href="/" class="btn btn-dark btn-light">Return to start</a>
+    </p>
+
+    <p>IP Scanning has completed.</p>
+    <p></p>
+
+    <div class="row">
+            <div class="col">
+                        {% if icmp_scans %}
+                            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                                <h5 class="pb-2 mb-0">ICMP Results</h5>
+                                <div class="media text-muted pt-3">
+                                    <p class="media-body pb-2 mb-0">
+                                        {{ icmp_scans.count }} IP addresses has been found by ICMP Scanning in {{ current_scan.icmp_scan_time }} seconds.
+                                    </p>
+                                </div>
+                                <div class="text-muted pt-3">
+                                    {% for ipaddress in icmp_scans %}
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item align-content-center">{{ ipaddress }}</li>
+                                        </ul>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+            </div>
+            <div class="col">
+                        {% if tcp_scans %}
+                            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                                <h5 class="pb-2 mb-0">TCP Results</h5>
+                                <div class="media text-muted pt-3">
+                                    <p class="media-body pb-2 mb-0">
+                                        {{ tcp_scans.count }} IP addresses has been found by TCP Scanning in {{ current_scan.tcp_scan_time }} seconds.
+                                    </p>
+                                </div>
+                                <div class="text-muted pt-3">
+                                    {% for ipaddress in tcp_scans %}
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">{{ ipaddress }}</li>
+                                        </ul>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        {% endif %}
+            </div>
+    </div>
+    <p></p>
+    <h4>Third step:</h4>
+    <p>
+        <a href="/createhost" class="btn btn-dark btn-lg">Create Hosts</a>
+    </p>
+{% endblock %}
